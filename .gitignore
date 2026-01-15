@@ -1,0 +1,7 @@
+
+# Allow git files
+!.gitignore
+
+# Explicitly ignore Terraform generated files
+.terraform/
+.terraform.lock.hcl
