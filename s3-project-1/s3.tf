@@ -3,9 +3,9 @@ resource "random_id" "bucket_suffix" {
 }
 
 resource "aws_s3_bucket" "example_bucket" {
-   bucket = "example-bucket-${random_id.bucket_suffix.hex}"
+  bucket = "example-bucket-${random_id.bucket_suffix.hex}"
 }
 
 output "bucket_id" {
-    value = aws_s3_bucket.example_bucket.bucket
+  value = aws_s3_bucket.example_bucket.bucket
 }
