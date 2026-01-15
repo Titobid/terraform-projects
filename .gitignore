@@ -1,7 +1,4 @@
-
-# Allow git files
-!.gitignore
-
-# Explicitly ignore Terraform generated files
+.env
 .terraform/
-.terraform.lock.hcl
+**.tfstate*
+.prettierrc
