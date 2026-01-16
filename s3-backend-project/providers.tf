@@ -5,6 +5,7 @@ terraform {
     bucket = "example-bucket-1e2bb2d4c938"
     key    = "s3-backend-project/state.tfstate"
     region = "ca-central-1"
+    use_lockfile = true
   }
   required_providers {
     aws = {
