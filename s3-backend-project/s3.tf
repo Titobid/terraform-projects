@@ -6,7 +6,7 @@ resource "aws_s3_bucket" "example_bucket" {
   bucket = "example-bucket-${random_id.bucket_suffix.hex}"
 }
 
-output "bucket_name" {
+output "bucket_names" {
   value = aws_s3_bucket.example_bucket.bucket
 }
 
