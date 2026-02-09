@@ -1,5 +1,5 @@
 resource "aws_instance" "web" {
-  ami                         = "ami-0f8f81db908241ec9"
+  ami                         = "ami-0ccad89d94f07de46"
   associate_public_ip_address = true
   instance_type               = "t2.micro"
   subnet_id                   = aws_subnet.public.id
@@ -11,6 +11,9 @@ resource "aws_instance" "web" {
     volume_size           = 1026
     volume_type           = "gp2"
     delete_on_termination = true
+  }
+  lifecycle {
+    create_before_destroy = true
   }
 }
 
