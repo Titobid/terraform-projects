@@ -33,12 +33,12 @@ output "ubuntu-us-east-ami-value" {
   value = data.aws_ami.ubuntu-us-east.id
 }
 
-# resource "aws_instance" "ubuntu-instance" {
-#     ami           = data.aws_ami.ubuntu.id
-#     instance_type = t2.micro
-#   root_block_device {
-#     volume_size = 10
-#     volume_type = gp3
-#     delete_on_termination = true
-#   }
-# }
+resource "aws_instance" "ubuntu-instance" {
+    ami           = data.aws_ami.ubuntu.id
+    instance_type = "t2.micro"
+  root_block_device {
+    volume_size = 10
+    volume_type = "gp3"
+    delete_on_termination = true
+  }
+}
