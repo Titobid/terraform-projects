@@ -3,3 +3,8 @@ variable "subnet_count" {
   type        = number
   default     = 2
 }
+
+variable "ec2_instance-count" {
+  type = number
+  default = 4
+}
