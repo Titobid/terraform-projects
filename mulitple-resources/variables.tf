@@ -4,7 +4,9 @@ variable "subnet_count" {
   default     = 2
 }
 
-variable "ec2_instance-count" {
-  type = number
-  default = 4
+variable "ec2_instance_config_list" {
+  type = list(object({
+    instance_type = string
+    ami           = string
+  }))
 }
