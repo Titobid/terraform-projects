@@ -7,7 +7,7 @@ locals {
 }
 data "aws_ami" "ubuntu" {
   most_recent = true
-  owners = ["099720109477"] # Canonical
+  owners      = ["099720109477"] # Canonical
   filter {
     name   = "name"
     values = ["ubuntu/images/hvm-ssd/ubuntu-focal-20.04-amd64-server-*"]
@@ -29,11 +29,21 @@ data "aws_ami" "nginx" {
     values = ["hvm"]
   }
 }
-resource "aws_instance" "web" {
+resource "aws_instance" "from_map" {
+  for_each      = var.ec2_instance_config_map
+  ami           = local.ami_ids[each.value.ami]
+  instance_type = each.value.instance_type
+  subnet_id     = aws_subnet.main[each.value.subnet_name].id
+  tags = {
+    Name = "${local.project}-web-${each.key}"
+  }
+}
+
+resource "aws_instance" "from_list" {
   count         = length(var.ec2_instance_config_list)
   ami           = local.ami_ids[var.ec2_instance_config_list[count.index].ami]
   instance_type = var.ec2_instance_config_list[count.index].instance_type
-  subnet_id     = aws_subnet.main[count.index % length(aws_subnet.main)].id
+  subnet_id     = aws_subnet.main[var.ec2_instance_config_list[count.index].subnet_name].id
   tags = {
     Name = "${local.project}-web-${count.index}"
   }
@@ -48,10 +58,10 @@ resource "aws_vpc" "main" {
 }
 
 resource "aws_subnet" "main" {
-  count      = var.subnet_count
+  for_each   = var.subnet_config
   vpc_id     = aws_vpc.main.id
-  cidr_block = "10.0.${count.index}.0/24"
+  cidr_block = each.value.cidr_block
   tags = {
-    Name = "${local.project}-${count.index}"
+    Name = "${local.project}-${each.key}"
   }
 }
