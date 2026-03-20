@@ -1,0 +1,9 @@
+users:
+- username: John
+  roles: [admin, developer]
+- username: Josh
+  roles: [readonly, sales]
+- username: Sarah
+  roles: [readonly, auditor]
+- username: Mike
+  roles: [admin, developer]      
