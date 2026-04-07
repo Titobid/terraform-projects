@@ -24,16 +24,6 @@ data "aws_vpc" "default" {
   default = true
 }
 
-variable "instance_type" {
-  type    = string
-  default = "t2.micro"
-}
-
-variable "availability_zone" {
-  type    = string
-  default = "ca-central-1a"
-}
-
 resource "aws_instance" "ubuntu" {
   ami           = data.aws_ami.Ubuntu.id
   instance_type = var.instance_type
